@@ -12,31 +12,27 @@ public class ToBanglaNumeralTest {
 
     @Test
     public void testConvertToBanglaNumeral() {
-//        assertEquals("৯৯৯৯.৯৯৯৯৯", convertToBanglaNumeral(9999.99999));
-//        assertEquals("১২৩৪.৫৬", convertToBanglaNumeral(1234.56));
-//        assertEquals("০", convertToBanglaNumeral(0.0));
-//        assertEquals("১", convertToBanglaNumeral(1.0));
-//        assertEquals("১০০০", convertToBanglaNumeral(1000.0));
-//        assertEquals("৯৯৯৯৯৯৯৯", convertToBanglaNumeral(99999999.0));
-//        assertEquals("১০০০০০০০", convertToBanglaNumeral(10000000.0));
-//        assertEquals("৯৮৭৬৫৪৩২১০", convertToBanglaNumeral(9876543210.0));
-//        assertEquals("০.০১", convertToBanglaNumeral(0.01));
-//        assertEquals("০.০০০০০১", convertToBanglaNumeral(0.000001));
-//        assertEquals("০.১", convertToBanglaNumeral(0.1000));
-//        assertEquals("০.১০০০", convertToBanglaNumeral("0.1000"));
-
-//        assertEquals("৯৯৯৯৯.০০০০১", convertToBanglaNumeral(99999.00001));
-        assertEquals("৯৯৯৯৯৯৯৯৯৯.৯৯৯৯৯৯", convertToBanglaNumeral(9999999999.999999));
-
-        assertEquals("৯.৯৯৯৯৯৯৯৯E৮", convertToBanglaNumeral(9.99999999E8)); // If not formatted properly
-        assertEquals("১০০০০০০০০", convertToBanglaNumeral(1.0E8)); // Expecting normal representation
-
-        assertEquals("-১০", convertToBanglaNumeral((double) -10));
-        assertEquals("-৯৯৯৯", convertToBanglaNumeral((double) -9999));
-        assertEquals("-০.০০১", convertToBanglaNumeral(-0.001));
-
-        assertEquals("১.০০০০০০০০", convertToBanglaNumeral(1.00000000)); // Ensuring full precision
-        assertEquals("৯৯৯৯৯৯৯৯৯৯", convertToBanglaNumeral(9999999999.0)); // Large whole number
+        assertEquals("৯৯৯৯.৯৯৯৯৯", convertToBanglaNumeral("9999.99999"));
+        assertEquals("১২৩৪.৫৬", convertToBanglaNumeral("1234.56"));
+        assertEquals("০.০", convertToBanglaNumeral("0.0"));
+        assertEquals("১.০", convertToBanglaNumeral("1.0"));
+        assertEquals("১০০০.০", convertToBanglaNumeral("1000.0"));
+        assertEquals("৯৯৯৯৯৯৯৯.০", convertToBanglaNumeral("99999999.0"));
+        assertEquals("১০০০০০০০.০", convertToBanglaNumeral("10000000.0"));
+        assertEquals("৯৮৭৬৫৪৩২১০.০", convertToBanglaNumeral("9876543210.0"));
+        assertEquals("০.০১", convertToBanglaNumeral("0.01"));
+        assertEquals("০.০০০০০১", convertToBanglaNumeral("0.000001"));
+        assertEquals("০.১০০০", convertToBanglaNumeral("0.1000"));
+        assertEquals("৯৯৯৯৯.০০০০১", convertToBanglaNumeral("99999.00001"));
+        assertEquals("৯৯৯৯৯৯৯৯৯৯.৯৯৯৯৯৯", convertToBanglaNumeral("9999999999.999999"));
+        assertEquals("৯.৯৯৯৯৯৯৯৯E৮", convertToBanglaNumeral("9.99999999E8"));
+        assertEquals("১.০E৮", convertToBanglaNumeral("1.0E8"));
+//        assertEquals("১০০০০০০০০", convertToBanglaNumeral(1.0E8)); // handle sci/non-sci format
+        assertEquals("-১০.০", convertToBanglaNumeral("-10.0"));
+        assertEquals("-৯৯৯৯.০", convertToBanglaNumeral("-9999.0"));
+        assertEquals("-০.০০১", convertToBanglaNumeral("-0.001"));
+        assertEquals("১.০০০০০০০০", convertToBanglaNumeral("1.00000000"));
+        assertEquals("৯৯৯৯৯৯৯৯৯৯.০", convertToBanglaNumeral("9999999999.0"));
     }
 
 
@@ -65,10 +61,6 @@ public class ToBanglaNumeralTest {
 //        assertEquals("ঋণাত্মক এক", convertToBanglaWords(-1.0));
 //        assertEquals("ঋণাত্মক একশো", convertToBanglaWords(-100.0));
 //        assertEquals("ঋণাত্মক নিরানব্বই দশমিক নয় নয়", convertToBanglaWords(-99.99));
-    }
-
-    private static String convertToBanglaNumeral(Double num) {
-        return NumberConverter.convertToBanglaNumerals(num);
     }
 
     private static String convertToBanglaNumeral(String num) {

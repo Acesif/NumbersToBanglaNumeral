@@ -107,7 +107,22 @@ public class NumberConverter {
     public static String convertToBanglaNumerals(String number) {
         StringBuilder banglaNumber = new StringBuilder();
         if (number.contains(".")){
-
+            for (char digit : number.split("\\.")[0].toCharArray()) {
+                if (Character.isDigit(digit)) {
+                    banglaNumber.append(BANGLA_DIGITS.get(Integer.parseInt(String.valueOf(digit))));
+                } else {
+                    banglaNumber.append(digit);
+                }
+            }
+            banglaNumber.append(".");
+            for (char digit : number.split("\\.")[1].toCharArray()) {
+                if (Character.isDigit(digit)) {
+                    banglaNumber.append(BANGLA_DIGITS.get(Integer.parseInt(String.valueOf(digit))));
+                } else {
+                    banglaNumber.append(digit);
+                }
+            }
+            return banglaNumber.toString();
         }
         for (char digit : number.toCharArray()) {
             if (Character.isDigit(digit)) {
@@ -115,6 +130,5 @@ public class NumberConverter {
             } else banglaNumber.append(digit);
         }
         return banglaNumber.toString();
-
     }
 }
