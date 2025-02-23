@@ -1,156 +1,96 @@
 package me.num.util;
 
+import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class NumberConverter {
 
     private static final Map<Integer, String> NUMERIC_WORDS = new LinkedHashMap<>();
+    private static final String[] UNITS = {"", "শত", "হাজার", "লক্ষ", "কোটি"};
+    private static final Map<Integer, String> BANGLA_DIGITS = Map.of(
+            0, "০",
+            1, "১",
+            2, "২",
+            3, "৩",
+            4, "৪",
+            5, "৫",
+            6, "৬",
+            7, "৭",
+            8, "৮",
+            9, "৯"
+    );
+
 
     static {
-        NUMERIC_WORDS.put(0, "শূন্য");
-        NUMERIC_WORDS.put(1, "এক");
-        NUMERIC_WORDS.put(2, "দুই");
-        NUMERIC_WORDS.put(3, "তিন");
-        NUMERIC_WORDS.put(4, "চার");
-        NUMERIC_WORDS.put(5, "পাঁচ");
-        NUMERIC_WORDS.put(6, "ছয়");
-        NUMERIC_WORDS.put(7, "সাত");
-        NUMERIC_WORDS.put(8, "আট");
-        NUMERIC_WORDS.put(9, "নয়");
-        NUMERIC_WORDS.put(10, "দশ");
-        NUMERIC_WORDS.put(11, "এগারো");
-        NUMERIC_WORDS.put(12, "বার");
-        NUMERIC_WORDS.put(13, "তেরো");
-        NUMERIC_WORDS.put(14, "চৌদ্দ");
-        NUMERIC_WORDS.put(15, "পনেরো");
-        NUMERIC_WORDS.put(16, "ষোল");
-        NUMERIC_WORDS.put(17, "সতেরো");
-        NUMERIC_WORDS.put(18, "আঠারো");
-        NUMERIC_WORDS.put(19, "উনিশ");
-        NUMERIC_WORDS.put(20, "বিশ");
-        NUMERIC_WORDS.put(21, "একুশ");
-        NUMERIC_WORDS.put(22, "বাইশ");
-        NUMERIC_WORDS.put(23, "তেইশ");
-        NUMERIC_WORDS.put(24, "চব্বিশ");
-        NUMERIC_WORDS.put(25, "পঁচিশ");
-        NUMERIC_WORDS.put(26, "ছাব্বিশ");
-        NUMERIC_WORDS.put(27, "সাতাশ");
-        NUMERIC_WORDS.put(28, "আঠাশ");
-        NUMERIC_WORDS.put(29, "উনত্রিশ");
-        NUMERIC_WORDS.put(30, "ত্রিশ");
-        NUMERIC_WORDS.put(31, "একত্রিশ");
-        NUMERIC_WORDS.put(32, "বত্রিশ");
-        NUMERIC_WORDS.put(33, "তেত্রিশ");
-        NUMERIC_WORDS.put(34, "চৌত্রিশ");
-        NUMERIC_WORDS.put(35, "পঁয়ত্রিশ");
-        NUMERIC_WORDS.put(36, "ছত্রিশ");
-        NUMERIC_WORDS.put(37, "সাঁইত্রিশ");
-        NUMERIC_WORDS.put(38, "আটত্রিশ");
-        NUMERIC_WORDS.put(39, "উনচল্লিশ");
-        NUMERIC_WORDS.put(40, "চল্লিশ");
-        NUMERIC_WORDS.put(41, "একচল্লিশ");
-        NUMERIC_WORDS.put(42, "বিয়াল্লিশ");
-        NUMERIC_WORDS.put(43, "তেতাল্লিশ");
-        NUMERIC_WORDS.put(44, "চুয়াল্লিশ");
-        NUMERIC_WORDS.put(45, "পঁয়তাল্লিশ");
-        NUMERIC_WORDS.put(46, "ছেচল্লিশ");
-        NUMERIC_WORDS.put(47, "সাতচল্লিশ");
-        NUMERIC_WORDS.put(48, "আটচল্লিশ");
-        NUMERIC_WORDS.put(49, "উনপঞ্চাশ");
-        NUMERIC_WORDS.put(50, "পঞ্চাশ");
-        NUMERIC_WORDS.put(51, "একান্ন");
-        NUMERIC_WORDS.put(52, "বায়ান্ন");
-        NUMERIC_WORDS.put(53, "তিপ্পান্ন");
-        NUMERIC_WORDS.put(54, "চুয়ান্ন");
-        NUMERIC_WORDS.put(55, "পঞ্চান্ন");
-        NUMERIC_WORDS.put(56, "ছাপ্পান্ন");
-        NUMERIC_WORDS.put(57, "সাতান্ন");
-        NUMERIC_WORDS.put(58, "আটান্ন");
-        NUMERIC_WORDS.put(59, "উনষাট");
-        NUMERIC_WORDS.put(60, "ষাট");
-        NUMERIC_WORDS.put(61, "একষট্টি");
-        NUMERIC_WORDS.put(62, "বাষট্টি");
-        NUMERIC_WORDS.put(63, "তেষট্টি");
-        NUMERIC_WORDS.put(64, "চৌষট্টি");
-        NUMERIC_WORDS.put(65, "পঁয়ষট্টি");
-        NUMERIC_WORDS.put(66, "ছেষট্টি");
-        NUMERIC_WORDS.put(67, "সাতষট্টি");
-        NUMERIC_WORDS.put(68, "আটষট্টি");
-        NUMERIC_WORDS.put(69, "উনসত্তর");
-        NUMERIC_WORDS.put(70, "সত্তর");
-        NUMERIC_WORDS.put(71, "একাত্তর");
-        NUMERIC_WORDS.put(72, "বাহাত্তর");
-        NUMERIC_WORDS.put(73, "তিয়াত্তর");
-        NUMERIC_WORDS.put(74, "চুয়াত্তর");
-        NUMERIC_WORDS.put(75, "পঁচাত্তর");
-        NUMERIC_WORDS.put(76, "ছিয়াত্তর");
-        NUMERIC_WORDS.put(77, "সাতাত্তর");
-        NUMERIC_WORDS.put(78, "আটাত্তর");
-        NUMERIC_WORDS.put(79, "উনআশি");
-        NUMERIC_WORDS.put(80, "আশি");
-        NUMERIC_WORDS.put(81, "একাশি");
-        NUMERIC_WORDS.put(82, "বিরাশি");
-        NUMERIC_WORDS.put(83, "তিরাশি");
-        NUMERIC_WORDS.put(84, "চুরাশি");
-        NUMERIC_WORDS.put(85, "পঁচাশি");
-        NUMERIC_WORDS.put(86, "ছিয়াশি");
-        NUMERIC_WORDS.put(87, "সাতাশি");
-        NUMERIC_WORDS.put(88, "আটাশি");
-        NUMERIC_WORDS.put(89, "উননব্বই");
-        NUMERIC_WORDS.put(90, "নব্বই");
-        NUMERIC_WORDS.put(91, "একানব্বই");
-        NUMERIC_WORDS.put(92, "বিরানব্বই");
-        NUMERIC_WORDS.put(93, "তিরানব্বই");
-        NUMERIC_WORDS.put(94, "চুরানব্বই");
-        NUMERIC_WORDS.put(95, "পঁচানব্বই");
-        NUMERIC_WORDS.put(96, "ছিয়ানব্বই");
-        NUMERIC_WORDS.put(97, "সাতানব্বই");
-        NUMERIC_WORDS.put(98, "আটানব্বই");
-        NUMERIC_WORDS.put(99, "নিরানব্বই");
-        NUMERIC_WORDS.put(100, "একশত");
+        String[] words = {"শূন্য", "এক", "দুই", "তিন", "চার", "পাঁচ", "ছয়", "সাত", "আট", "নয়", "দশ",
+                "এগারো", "বার", "তেরো", "চৌদ্দ", "পনেরো", "ষোল", "সতেরো", "আঠারো", "উনিশ", "বিশ",
+                "একুশ", "বাইশ", "তেইশ", "চব্বিশ", "পঁচিশ", "ছাব্বিশ", "সাতাশ", "আঠাশ", "উনত্রিশ", "ত্রিশ",
+                "একত্রিশ", "বত্রিশ", "তেত্রিশ", "চৌত্রিশ", "পঁয়ত্রিশ", "ছত্রিশ", "সাঁইত্রিশ", "আটত্রিশ", "উনচল্লিশ", "চল্লিশ",
+                "একচল্লিশ", "বিয়াল্লিশ", "তেতাল্লিশ", "চুয়াল্লিশ", "পঁয়তাল্লিশ", "ছেচল্লিশ", "সাতচল্লিশ", "আটচল্লিশ", "উনপঞ্চাশ", "পঞ্চাশ",
+                "একান্ন", "বায়ান্ন", "তিপ্পান্ন", "চুয়ান্ন", "পঞ্চান্ন", "ছাপ্পান্ন", "সাতান্ন", "আটান্ন", "উনষাট", "ষাট",
+                "একষট্টি", "বাষট্টি", "তেষট্টি", "চৌষট্টি", "পঁয়ষট্টি", "ছেষট্টি", "সাতষট্টি", "আটষট্টি", "উনসত্তর", "সত্তর",
+                "একাত্তর", "বাহাত্তর", "তিয়াত্তর", "চুয়াত্তর", "পঁচাত্তর", "ছিয়াত্তর", "সাতাত্তর", "আটাত্তর", "উনআশি", "আশি",
+                "একাশি", "বিরাশি", "তিরাশি", "চুরাশি", "পঁচাশি", "ছিয়াশি", "সাতাশি", "আটাশি", "উননব্বই", "নব্বই",
+                "একানব্বই", "বিরানব্বই", "তিরানব্বই", "চুরানব্বই", "পঁচানব্বই", "ছিয়ানব্বই", "সাতানব্বই", "আটানব্বই", "নিরানব্বই", "একশত"};
+
+        for (int i = 0; i <= 100; i++) {
+            NUMERIC_WORDS.put(i, words[i]);
+        }
     }
 
-    private static final String[] UNITS = {"", "শত", "হাজার", "লক্ষ", "কোটি"};
-    private static final char[] BANGLA_DIGITS = {'০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'};
+    public static String convertToBanglaWords(double number) {
+        if (number == 0) return NUMERIC_WORDS.get(0);
 
-    public static String convertToBanglaWords(Double number) {
-        if (number == 0) {
-            return NUMERIC_WORDS.get(0);
-        }
-
-        String[] numberParts = String.valueOf(number).split("\\.");
-        int integerPart = Integer.parseInt(numberParts[0]);
-        String fractionalPart = numberParts.length > 1 ? numberParts[1] : "";
+        BigDecimal bigDecimal = new BigDecimal(String.valueOf(number));
+        BigDecimal[] parts = bigDecimal.divideAndRemainder(BigDecimal.ONE);
+        int integerPart = parts[0].intValue();
+        String fractionalPart = parts[1].compareTo(BigDecimal.ZERO) > 0 ? parts[1].toPlainString().substring(2) : "";
 
         StringBuilder result = new StringBuilder();
-
-        int[] parts = {
-                integerPart % 100,
-                (integerPart / 100) % 10,
-                (integerPart / 1000) % 100,
-                (integerPart / 100000) % 100,
-                integerPart / 10000000
-        };
-
-        for (int i = parts.length - 1; i >= 0; i--) {
-            if (parts[i] > 0) {
-                result.append(NUMERIC_WORDS.getOrDefault(parts[i], getNumberInWords(parts[i]))).append(" ");
-                result.append(UNITS[i]).append(" ");
-            }
-        }
+        result.append(getIntegerInWords(integerPart));
 
         if (!fractionalPart.isEmpty()) {
-            result.append("দশমিক ");
+            result.append(" দশমিক");
             for (char digit : fractionalPart.toCharArray()) {
-                result.append(NUMERIC_WORDS.get(Character.getNumericValue(digit))).append(" ");
+                result.append(" ").append(NUMERIC_WORDS.get(Character.getNumericValue(digit)));
             }
         }
 
         return result.toString().trim();
     }
 
-    private static String getNumberInWords(int number) {
+    private static String getIntegerInWords(int number) {
+        if (NUMERIC_WORDS.containsKey(number)) return NUMERIC_WORDS.get(number);
+
+        int[] parts = {
+                number % 100,
+                (number / 100) % 10,
+                (number / 1000) % 100,
+                (number / 100000) % 100,
+                number / 10000000
+        };
+
+        StringBuilder result = new StringBuilder();
+        boolean firstPartAdded = false;
+
+        for (int i = parts.length - 1; i >= 0; i--) {
+            if (parts[i] > 0) {
+                if (firstPartAdded) {
+                    result.append(" ");
+                }
+                result.append(NUMERIC_WORDS.getOrDefault(parts[i], getFallbackNumberWords(parts[i])));
+                if (!UNITS[i].isEmpty()) {
+                    result.append(" ").append(UNITS[i]);
+                }
+                firstPartAdded = true;
+            }
+        }
+
+        return result.toString().trim();
+    }
+
+    private static String getFallbackNumberWords(int number) {
         if (NUMERIC_WORDS.containsKey(number)) {
             return NUMERIC_WORDS.get(number);
         } else if (number < 100) {
@@ -159,15 +99,22 @@ public class NumberConverter {
         return "";
     }
 
-    public static String convertToBanglaNumerals(double number) {
-        String numberStr = String.valueOf(number);
-        StringBuilder banglaNumber = new StringBuilder();
+    public static String convertToBanglaNumerals(Double number) {
+        String numberStr = new BigDecimal(String.valueOf(number)).stripTrailingZeros().toPlainString();
+        return convertToBanglaNumerals(numberStr);
+    }
 
-        for (char digit : numberStr.toCharArray()) {
+    public static String convertToBanglaNumerals(String number) {
+        StringBuilder banglaNumber = new StringBuilder();
+        if (number.contains(".")){
+
+        }
+        for (char digit : number.toCharArray()) {
             if (Character.isDigit(digit)) {
-                banglaNumber.append(BANGLA_DIGITS[digit - '0']);
+                banglaNumber.append(BANGLA_DIGITS.get(Integer.parseInt(String.valueOf(digit))));
             } else banglaNumber.append(digit);
         }
         return banglaNumber.toString();
+
     }
 }
