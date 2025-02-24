@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import static me.num.util.NumberMap.*;
 
-public class NumberConverter {
+public class BanglaNumeralConverter {
 
     public static String convertNumberToBanglaWords(String number) {
         Double numberDouble = Double.parseDouble(number);
