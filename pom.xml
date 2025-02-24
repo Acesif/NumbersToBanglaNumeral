@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.acesif</groupId>
-    <artifactId>BanglaNumeralUtil</artifactId>
+    <artifactId>banglanumeralutil</artifactId>
     <version>1.0</version>
 
     <properties>
@@ -13,6 +13,12 @@
         <maven.compiler.target>23</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/Acesif/NumbersToBanglaNumeral</url>
+        </repository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
