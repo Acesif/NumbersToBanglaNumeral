@@ -25,7 +25,7 @@ Add the following dependency in your pom.xml:
 <dependency>
     <groupId>com.acesif</groupId>
     <artifactId>banglanumeralutil</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
