@@ -34,12 +34,15 @@ Add the following dependency in your pom.xml:
 Convert Numbers to Bangla Numerals
 
 ```java
-import com.acesif.BanglaNumeralUtil;
+import com.acesif.BanglaNumeralConverter;
 
 public class Main {
     public static void main(String[] args) {
-        String banglaNumber = BanglaNumeralUtil.convertToBangla(12345);
-        System.out.println("Bangla Numeral: " + banglaNumber);  // Output: ১২৩৪৫
+        String banglaNumberInWords = BanglaNumeralConverter.convertNumberToBanglaWords("1234.56");
+        System.out.println("In Words: " + banglaNumberInWords);  // Output: এক হাজার দুই শত চৌত্রিশ দশমিক পাঁচ ছয়
+
+        String banglaNumber = BanglaNumeralConverter.convertNumberToBanglaNumerals("1234.56");
+        System.out.println("In Numerals: " + banglaNumber);  // Output: ১২৩৪.৫৬
     }
 }
 ```
