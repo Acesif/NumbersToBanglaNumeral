@@ -1,22 +1,20 @@
 package me.num.util;
 
-import lombok.extern.slf4j.Slf4j;
-
+import java.awt.*;
 import java.math.BigDecimal;
 import static me.num.util.NumberMap.*;
 
-@Slf4j
 public class BanglaNumeralConverter {
 
     public static String convertNumberToBanglaWords(String number) throws IllegalArgumentException {
 
         if (number == null) {
-            log.error("Illegal argument: Null number passed");
+            System.err.println("Illegal argument: Null number passed");
             return null;
         }
 
         if (number.isEmpty()) {
-            log.error("Illegal argument: Empty number passed");
+            System.err.println("Illegal argument: Empty number passed");
             return "";
         }
 
@@ -35,7 +33,7 @@ public class BanglaNumeralConverter {
         try {
             bigDecimal = new BigDecimal(number);
         } catch (NumberFormatException e) {
-            log.error("Illegal argument: Unable to parse number", e);
+            System.err.println("Illegal argument: Unable to parse number "+ e);
             throw e;
         }
 
