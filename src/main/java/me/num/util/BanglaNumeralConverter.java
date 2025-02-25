@@ -1,26 +1,59 @@
 package me.num.util;
 
-import java.math.BigDecimal;
+import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigDecimal;
 import static me.num.util.NumberMap.*;
 
+@Slf4j
 public class BanglaNumeralConverter {
 
-    public static String convertNumberToBanglaWords(String number) {
-        Double numberDouble = Double.parseDouble(number);
-        if (numberDouble == 0) return NUMERIC_WORDS.get(0);
+    public static String convertNumberToBanglaWords(String number) throws IllegalArgumentException {
 
-        boolean isNegative = numberDouble < 0;
-        if (isNegative) {
-            numberDouble = Math.abs(numberDouble);
+        if (number == null) {
+            log.error("Illegal argument: Null number passed");
+            return null;
         }
 
-        BigDecimal bigDecimal = new BigDecimal(String.valueOf(numberDouble));
+        if (number.isEmpty()) {
+            log.error("Illegal argument: Empty number passed");
+            return "";
+        }
+
+        int dotIndex = number.indexOf('.');
+        String integerPartStr = (dotIndex >= 0) ? number.substring(0, dotIndex) : number;
+
+        if (integerPartStr.startsWith("+")) {
+            integerPartStr = integerPartStr.substring(1);
+        }
+
+        if (Math.abs(Long.parseLong(integerPartStr)) > 1999999999L) {
+            throw new IllegalArgumentException("Cannot accept numbers greater than 1999999999");
+        }
+
+        BigDecimal bigDecimal;
+        try {
+            bigDecimal = new BigDecimal(number);
+        } catch (NumberFormatException e) {
+            log.error("Illegal argument: Unable to parse number", e);
+            throw e;
+        }
+
+        if (bigDecimal.compareTo(BigDecimal.ZERO) == 0) {
+            return NUMERIC_WORDS.get(0);
+        }
+
+        boolean isNegative = bigDecimal.compareTo(BigDecimal.ZERO) < 0;
+        if (isNegative) {
+            bigDecimal = bigDecimal.abs();
+        }
+
         BigDecimal[] parts = bigDecimal.divideAndRemainder(BigDecimal.ONE);
         int integerPart = parts[0].intValue();
-        String fractionalPart = parts[1].compareTo(BigDecimal.ZERO) > 0
-                ? parts[1].stripTrailingZeros().toPlainString().replaceFirst("0\\.", "")
-                : "";
+        String fractionalPart = "";
+        if (parts[1].compareTo(BigDecimal.ZERO) > 0) {
+            fractionalPart = parts[1].stripTrailingZeros().toPlainString().replaceFirst("0\\.", "");
+        }
 
         StringBuilder result = new StringBuilder();
         result.append(getIntegerInWords(integerPart));

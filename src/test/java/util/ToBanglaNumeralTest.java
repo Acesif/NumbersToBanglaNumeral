@@ -4,6 +4,7 @@ import me.num.util.BanglaNumeralConverter;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class ToBanglaNumeralTest {
 
@@ -31,6 +32,7 @@ public class ToBanglaNumeralTest {
         assertEquals("৯৯৯৯৯৯৯৯৯৯.০", BanglaNumeralConverter.convertNumberToBanglaNumerals("9999999999.0"));
         assertEquals("০.০০০১০", BanglaNumeralConverter.convertNumberToBanglaNumerals("0.00010"));
         assertEquals("১০০০০০০০০০০০", BanglaNumeralConverter.convertNumberToBanglaNumerals("1E11"));
+        assertEquals("৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯৯.০", BanglaNumeralConverter.convertNumberToBanglaNumerals("9999999999999999999999999999999999999999.0"));
     }
 
     @Test
@@ -47,7 +49,8 @@ public class ToBanglaNumeralTest {
         assertEquals("নিরানব্বই কোটি নিরানব্বই লক্ষ নিরানব্বই হাজার নয় শত নিরানব্বই", BanglaNumeralConverter.convertNumberToBanglaWords("999999999.0"));
         assertEquals("শূন্য দশমিক শূন্য শূন্য শূন্য শূন্য শূন্য শূন্য এক", BanglaNumeralConverter.convertNumberToBanglaWords("0.0000001"));
         assertEquals("এক শত তেইশ কোটি পঁয়তাল্লিশ লক্ষ সাতান্ন হাজার আট শত নব্বই", BanglaNumeralConverter.convertNumberToBanglaWords("1234557890.0"));
-        assertEquals("নিরানব্বই কোটি নিরানব্বই লক্ষ নিরানব্বই হাজার নয় শত নিরানব্বই দশমিক নয় নয় নয়", BanglaNumeralConverter.convertNumberToBanglaWords("999999999.999"));
+        assertEquals("এক শত নিরানব্বই কোটি নিরানব্বই লক্ষ নিরানব্বই হাজার নয় শত নিরানব্বই দশমিক নয় নয় নয়", BanglaNumeralConverter.convertNumberToBanglaWords("1999999999.999"));
+        assertEquals("এক শত নিরানব্বই কোটি নিরানব্বই লক্ষ নিরানব্বই হাজার নয় শত নিরানব্বই", BanglaNumeralConverter.convertNumberToBanglaWords("1999999999"));
         assertEquals("এক", BanglaNumeralConverter.convertNumberToBanglaWords("1.000"));
         assertEquals("ঋণাত্মক এক", BanglaNumeralConverter.convertNumberToBanglaWords("-1.0"));
         assertEquals("ঋণাত্মক এক শত", BanglaNumeralConverter.convertNumberToBanglaWords("-100.0"));
@@ -55,5 +58,7 @@ public class ToBanglaNumeralTest {
         assertEquals("এগারো লক্ষ এগারো হাজার এক শত এগারো", BanglaNumeralConverter.convertNumberToBanglaWords("1111111.0"));
         assertEquals("শূন্য", BanglaNumeralConverter.convertNumberToBanglaWords("-0.0"));
         assertEquals("দশ", BanglaNumeralConverter.convertNumberToBanglaWords("10.00"));
+        assertEquals("", BanglaNumeralConverter.convertNumberToBanglaWords(""));
+        assertNull(BanglaNumeralConverter.convertNumberToBanglaWords(null));
     }
 }

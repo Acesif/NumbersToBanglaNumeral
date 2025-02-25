@@ -42,7 +42,7 @@ public class NumberMap {
                 .collect(Collectors.toMap(
                         i -> i,
                         i -> words[i],
-                        (a, b) -> a,
+                        (a, _) -> a,
                         LinkedHashMap::new
                 ));
     }
