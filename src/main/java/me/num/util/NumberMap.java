@@ -1,11 +1,17 @@
 package me.num.util;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class NumberMap {
+
+    public static final List<String> allowedStrings = Arrays.asList(
+            "negative","and", "point", "zero", "one", "two", "three", "four", "five",
+            "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
+            "seventeen", "eighteen", "nineteen", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty",
+            "ninety", "hundred", "thousand", "million", "billion", "trillion"
+    );
 
     public static final String[] UNITS = {"", "শত", "হাজার", "লক্ষ", "কোটি"};
     public static final Map<Integer, String> BANGLA_DIGITS = Map.of(
@@ -45,5 +51,44 @@ public class NumberMap {
                         (a, _) -> a,
                         LinkedHashMap::new
                 ));
+    }
+
+    public static final Map<String, String> numberMap = new HashMap<>();
+
+    static {
+        numberMap.put("negative", "ঋণাত্মক");
+        numberMap.put("zero", "শূন্য");
+        numberMap.put("one", "এক");
+        numberMap.put("two", "দুই");
+        numberMap.put("three", "তিন");
+        numberMap.put("four", "চার");
+        numberMap.put("five", "পাঁচ");
+        numberMap.put("six", "ছয়");
+        numberMap.put("seven", "সাত");
+        numberMap.put("eight", "আট");
+        numberMap.put("nine", "নয়");
+        numberMap.put("ten", "দশ");
+        numberMap.put("eleven", "এগারো");
+        numberMap.put("twelve", "বারো");
+        numberMap.put("thirteen", "তেরো");
+        numberMap.put("fourteen", "চৌদ্দ");
+        numberMap.put("fifteen", "পনেরো");
+        numberMap.put("sixteen", "ষোলো");
+        numberMap.put("seventeen", "সতেরো");
+        numberMap.put("eighteen", "আঠারো");
+        numberMap.put("nineteen", "ঊনিশ");
+        numberMap.put("twenty", "বিশ");
+        numberMap.put("thirty", "ত্রিশ");
+        numberMap.put("forty", "চল্লিশ");
+        numberMap.put("fifty", "পঞ্চাশ");
+        numberMap.put("sixty", "ষাট");
+        numberMap.put("seventy", "সত্তর");
+        numberMap.put("eighty", "আশি");
+        numberMap.put("ninety", "নব্বই");
+        numberMap.put("hundred", "শত");
+        numberMap.put("thousand", "হাজার");
+        numberMap.put("million", "মিলিয়ন");
+        numberMap.put("billion", "বিলিয়ন");
+        numberMap.put("point", "দশমিক");
     }
 }

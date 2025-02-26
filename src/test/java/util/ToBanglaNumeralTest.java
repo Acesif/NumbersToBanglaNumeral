@@ -3,6 +3,7 @@ package util;
 import me.num.util.BanglaNumeralConverter;
 import org.junit.jupiter.api.Test;
 
+import static me.num.util.BanglaNumeralConverter.convertEnglishWordsToBanglaNumerals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -60,5 +61,60 @@ public class ToBanglaNumeralTest {
         assertEquals("দশ", BanglaNumeralConverter.convertNumberToBanglaWords("10.00"));
         assertEquals("", BanglaNumeralConverter.convertNumberToBanglaWords(""));
         assertNull(BanglaNumeralConverter.convertNumberToBanglaWords(null));
+    }
+
+    @Test
+    public void testConvertWordsToBanglaWords() {
+        assertEquals("দুই শত ছাপ্পান্ন", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("Two hundred fifty six"));
+        assertEquals("নয় হাজার নয় শত নিরানব্বই", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("Nine thousand nine hundred ninety nine"));
+        assertEquals("দশ লক্ষ", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("One million"));
+        assertEquals("এক শত কোটি", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("One billion"));
+        assertEquals("random text", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("random text"));
+        assertEquals("", BanglaNumeralConverter.convertEnglishWordsToBanglaWords(""));
+        assertEquals("12345", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("12345"));
+        assertEquals("শূন্য দশমিক পাঁচ", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("Zero point five"));
+        assertEquals("তিন দশমিক এক চার", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("Three point one four"));
+        assertEquals("এক শত দুই দশমিক শূন্য পাঁচ", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("One hundred two point zero five"));
+        assertEquals("নয় হাজার নয় শত নব্বই দশমিক নয়", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("Nine thousand nine hundred ninety point nine"));
+        assertEquals("দশ লক্ষ দশমিক এক", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("One million point one"));
+        assertEquals("এক দশমিক দুই তিন চার পাঁচ", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("One point two three four five"));
+        assertEquals("ঋণাত্মক পাঁচ", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("Negative five"));
+        assertEquals("ঋণাত্মক দুই দশমিক সাত", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("Negative two point seven"));
+        assertEquals("ঋণাত্মক এক হাজার দুই শত পঁচিশ দশমিক শূন্য এক", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("Negative one thousand two hundred twenty five point zero one"));
+        assertEquals("দশ কোটি", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("One hundred million"));
+        assertEquals("এক লক্ষ", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("One hundred thousand"));
+        assertEquals("দশ লক্ষ", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("One million"));
+        assertEquals("এক কোটি", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("Ten million"));
+        assertEquals("এক", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("One"));
+        assertEquals("random 12 text", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("random 12 text"));
+        assertEquals("ঋণাত্মক দশ লক্ষ", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("Negative ten hundred thousand"));
+        assertEquals("শূন্য", BanglaNumeralConverter.convertEnglishWordsToBanglaWords("Zero"));
+    }
+
+    @Test
+    void testConvertEnglishWordsToBanglaNumerals() {
+        assertEquals("৯", convertEnglishWordsToBanglaNumerals("Nine"));
+        assertEquals("১০", convertEnglishWordsToBanglaNumerals("Ten"));
+        assertEquals("৫০", convertEnglishWordsToBanglaNumerals("Fifty"));
+        assertEquals("১০০", convertEnglishWordsToBanglaNumerals("One hundred"));
+        assertEquals("৯৯৯", convertEnglishWordsToBanglaNumerals("Nine hundred ninety nine"));
+        assertEquals("১০০০", convertEnglishWordsToBanglaNumerals("One thousand"));
+        assertEquals("৯৯৯৯", convertEnglishWordsToBanglaNumerals("Nine thousand nine hundred ninety nine"));
+        assertEquals("১০০০০", convertEnglishWordsToBanglaNumerals("Ten thousand"));
+        assertEquals("১০০০০০", convertEnglishWordsToBanglaNumerals("One hundred thousand"));
+        assertEquals("১০০০০০০", convertEnglishWordsToBanglaNumerals("One million"));
+        assertEquals("৯.৯", convertEnglishWordsToBanglaNumerals("Nine point nine"));
+        assertEquals("১০.৫", convertEnglishWordsToBanglaNumerals("Ten point five zero"));
+        assertEquals("৯৯৯৯.৯৯", convertEnglishWordsToBanglaNumerals("Nine thousand nine hundred ninety nine point nine nine"));
+        assertEquals("১.২৩৪", convertEnglishWordsToBanglaNumerals("One point two three four"));
+        assertEquals("১২৩.৪৫", convertEnglishWordsToBanglaNumerals("One hundred twenty three point four five"));
+        assertEquals("-৯", convertEnglishWordsToBanglaNumerals("Negative nine"));
+        assertEquals("-১০", convertEnglishWordsToBanglaNumerals("Negative ten"));
+        assertEquals("-৯৯৯৯", convertEnglishWordsToBanglaNumerals("Negative nine thousand nine hundred ninety nine"));
+        assertEquals("-১.২৩", convertEnglishWordsToBanglaNumerals("Negative one point two three"));
+        assertEquals("১০০০০০০", convertEnglishWordsToBanglaNumerals("One million"));
+        assertEquals("১০০০০০০০০০", convertEnglishWordsToBanglaNumerals("One billion"));
+        assertEquals("১০০০০০০০০০০০০", convertEnglishWordsToBanglaNumerals("One trillion"));
+        assertEquals("৯৯৯৯৯৯৯৯৯৯৯৯", convertEnglishWordsToBanglaNumerals("Nine hundred ninety nine billion nine hundred ninety nine million nine hundred ninety nine thousand nine hundred ninety nine"));
     }
 }

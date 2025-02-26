@@ -25,7 +25,7 @@ Add the following dependency in your pom.xml:
 <dependency>
     <groupId>com.acesif</groupId>
     <artifactId>banglanumeralutil</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 
@@ -46,4 +46,7 @@ public class Main {
     }
 }
 ```
+
+### Acknowledgements
+Made use of a [`word-to-numbers`](https://github.com/jgraham0325/words-to-numbers) utility class made by [James Graham](https://github.com/jgraham0325)
 

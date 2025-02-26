@@ -2,6 +2,7 @@ package me.num.util;
 
 import java.awt.*;
 import java.math.BigDecimal;
+import static me.num.util.HelperMethods.*;
 import static me.num.util.NumberMap.*;
 
 public class BanglaNumeralConverter {
@@ -70,52 +71,6 @@ public class BanglaNumeralConverter {
         return finalResult;
     }
 
-    private static String getIntegerInWords(int number) {
-        if (number < 100) {
-            return NUMERIC_WORDS.get(number);
-        }
-
-        StringBuilder sb = new StringBuilder();
-
-        if (number < 1000) {
-            int hundreds = number / 100;
-            int remainder = number % 100;
-            sb.append(getIntegerInWords(hundreds)).append(" ").append(UNITS[1]);
-            if (remainder > 0) {
-                sb.append(" ").append(getIntegerInWords(remainder));
-            }
-            return sb.toString();
-        }
-
-        if (number < 100000) {
-            int thousands = number / 1000;
-            int remainder = number % 1000;
-            sb.append(getIntegerInWords(thousands)).append(" ").append(UNITS[2]);
-            if (remainder > 0) {
-                sb.append(" ").append(getIntegerInWords(remainder));
-            }
-            return sb.toString();
-        }
-
-        if (number < 10000000) {
-            int lakhs = number / 100000;
-            int remainder = number % 100000;
-            sb.append(getIntegerInWords(lakhs)).append(" ").append(UNITS[3]);
-            if (remainder > 0) {
-                sb.append(" ").append(getIntegerInWords(remainder));
-            }
-            return sb.toString();
-        }
-
-        int crores = number / 10000000;
-        int remainder = number % 10000000;
-        sb.append(getIntegerInWords(crores)).append(" ").append(UNITS[4]);
-        if (remainder > 0) {
-            sb.append(" ").append(getIntegerInWords(remainder));
-        }
-        return sb.toString();
-    }
-
     public static String convertNumberToBanglaNumerals(String number) {
         BigDecimal bd;
         try {
@@ -153,5 +108,15 @@ public class BanglaNumeralConverter {
             }
         }
         return banglaNumber.toString();
+    }
+
+    public static String convertEnglishWordsToBanglaWords(String input) {
+        String numericValue = convertEnglishWordsToNumericString(input);
+        return numericValue != null ? convertNumberToBanglaWords(numericValue) : input;
+    }
+
+    public static String convertEnglishWordsToBanglaNumerals(String input) {
+        String numericValue = convertEnglishWordsToNumericString(input);
+        return numericValue != null ? convertNumberToBanglaNumerals(numericValue) : input;
     }
 }
