@@ -40,9 +40,15 @@ public class Main {
     public static void main(String[] args) {
         String banglaNumberInWords = BanglaNumeralConverter.convertNumberToBanglaWords("1234.56");
         System.out.println("In Words: " + banglaNumberInWords);  // Output: এক হাজার দুই শত চৌত্রিশ দশমিক পাঁচ ছয়
+        
+        String englishTobanglaNumberInWords = BanglaNumeralConverter.convertEnglishWordsToBanglaWords("Two hundred fifty six");
+        System.out.println("In Words: " + banglaNumberInWords);  // Output: দুই শত ছাপ্পান্ন
 
         String banglaNumber = BanglaNumeralConverter.convertNumberToBanglaNumerals("1234.56");
         System.out.println("In Numerals: " + banglaNumber);  // Output: ১২৩৪.৫৬
+        
+        String englishTobanglaNumbers = BanglaNumeralConverter.convertEnglishWordsToBanglaNumerals("Nine thousand nine hundred ninety nine");
+        System.out.println("In Numerals: " + banglaNumber);  // Output: ৯৯৯৯
     }
 }
 ```
